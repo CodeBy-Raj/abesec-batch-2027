@@ -1,18 +1,18 @@
-import ProductCard from './ProductCard';
-// import products from '../data/products';
-import { useEffect, useState } from 'react';
+import ProductCard from "./ProductCard";
+import { useEffect, useState } from "react";
 
 const ProductList = () => {
   let [productList, setProductList] = useState([]);
-let [searchItm,setSearchItm] = useState("");
+  let [searchItem, setSearchItem] = useState("");
+  let [allProducts, setAllProducts] = useState([]);
 
   const fetchData = async () => {
     const response = await fetch(
-      'https://682755e76b7628c5290ff8b1.mockapi.io/api/v1/products/products'
+      "https://682755e76b7628c5290ff8b1.mockapi.io/api/v1/products/products"
     );
     const products = await response.json();
-    console.log(products);
     setProductList(products);
+    setAllProducts(products);
   };
 
   useEffect(() => {
@@ -21,44 +21,46 @@ let [searchItm,setSearchItm] = useState("");
 
   function handleFilterButtonClick() {
     productList = productList.filter((product) => product.rating > 4);
-    console.log(productList);
-    
     setProductList(productList);
   }
 
-  let handleSearchItm =()=>{
-     const searchFor= productList.filter((prod)=> prod.name.toLowerCase().includes(searchItm))
-     console.log(searchFor);
+  let handleSearchItemBtn = () => {
+    const searchFor = productList.filter((prod) =>
+      prod.name.toLowerCase().includes(searchItem)
+    );
+    setProductList(searchFor);
+    setSearchItem("");
+  };
 
-     setProductList(searchFor);
-     setSearchItm("");
-    
-  }
+  let handleResetBtn = () => {
+    setProductList(allProducts);
+  };
 
   return (
-    <section className='products'>
+    <section className="products">
       <h1>Trending Products</h1>
-
       <div className="container">
-
-      <div className='searchItems'>
-        <input 
-        type='search' 
-        placeholder='Search By Product Title' 
-        value={searchItm}
-        onChange={e => setSearchItm(e.target.value.toLowerCase())}
-
-        />
-        <button className='search-btn button' onClick={handleSearchItm}>Search</button>
+        <div className="searchItems">
+          <input
+            type="search"
+            placeholder="Search By Product Title"
+            value={searchItem}
+            onChange={(e) => setSearchItem(e.target.value.toLowerCase())}
+          />
+          <button className="search-btn button" onClick={handleSearchItemBtn}>
+            Search
+          </button>
+          <button className="search-btn button" onClick={handleResetBtn}>
+            Reset
+          </button>
+        </div>
+        <div>
+          <button onClick={handleFilterButtonClick} className="filter-button">
+            Filter Top Rated Products
+          </button>
+        </div>
       </div>
-      <div>
-
-      <button onClick={handleFilterButtonClick} className='filter-button'>
-        Filter Top Rated Products
-      </button>
-      </div>
-      </div>
-      <div className='products-grid'>
+      <div className="products-grid">
         {productList.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

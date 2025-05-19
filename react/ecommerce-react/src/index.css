@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .logo {
@@ -47,24 +47,23 @@ header {
   border: none;
   margin-right: 10px;
 }
-.container{
+.container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
   margin-top: 10px;
-  
 }
-.searchItems input{
-   padding: 10px;
+.searchItems input {
+  padding: 10px;
   font-size: 14px;
   border-radius: 10px;
   border: none;
   margin-right: 10px;
 }
 
-.button { 
+.button {
   display: inline-block;
   padding: 9px 15px;
   font-size: 13px;
@@ -81,14 +80,14 @@ header {
 }
 
 .button:hover {
-  background-color: #e81f91; 
+  background-color: #e81f91;
   color: #fff;
   transition-duration: 0.3s;
 }
 
 .button:active {
   background-color: #e81f91;
- 
+
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -183,7 +182,6 @@ header {
 }
 
 .filter-button {
-
   padding: 10px;
   color: white;
   background-color: #e81f91;
